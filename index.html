@@ -492,6 +492,106 @@ h3.t button:focus-visible{outline-offset:2px}
 .tok:focus-visible,.prow button:focus-visible,.qvnav button:focus-visible,
 .more button:focus-visible,.empty button:focus-visible{outline-offset:2px}
 
+/* ─────────── 찾는 물건 ───────────
+   A search the reader keeps. The bar under the navigation only appears when
+   one of them has something the reader has not been shown yet.          */
+.wbar{display:none;align-items:baseline;flex-wrap:wrap;gap:6px 18px;
+  padding-block:12px;padding-inline:max(var(--gut), calc((100% - var(--maxw))/2));
+  border-bottom:1px solid var(--hair2);font-size:11px;color:var(--mid)}
+.wbar.on{display:flex}
+.wbar .lbl{margin-right:2px}
+.wbar button{font-size:11px;color:var(--ink);border-bottom:1px solid var(--hair);padding-bottom:1px;
+  text-align:left;overflow-wrap:anywhere}
+.wbar button:hover{border-bottom-color:var(--ink)}
+.wbar b{font-weight:400;margin-left:7px;font-variant-numeric:tabular-nums;color:var(--mid)}
+.wbar .wx{font-size:10.5px;color:var(--soft)}
+.applied .wsv{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid);
+  border-bottom:1px solid var(--hair);padding-bottom:2px}
+.applied .wsv:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.applied .wsv[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.applied .wsv:disabled{color:var(--soft);border-bottom-color:transparent;cursor:default}
+.panel .watch{margin-bottom:30px;max-width:680px}
+.panel .watch>.lbl{display:block;margin-bottom:8px}
+.watch .wr{display:flex;align-items:baseline;gap:14px;padding:6px 0;border-bottom:1px solid var(--hair2);font-size:12px}
+.watch .wo{flex:1;min-width:0;text-align:left;color:var(--mid);overflow-wrap:anywhere}
+.watch .wo:hover{color:var(--ink)}
+.watch .c{font-size:10px;color:var(--soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.watch .nw{font-size:10px;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.watch .wd{font-size:12px;line-height:1;color:var(--soft);padding:0 2px}
+.watch .wd:hover{color:var(--ink)}
+.watch p,.mysz p,.snote{margin:10px 0 0;font-size:10.5px;color:var(--soft);line-height:1.6;font-weight:400}
+.head .hn{margin-left:12px;font-family:'Inter','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:10.5px;letter-spacing:.06em;color:var(--mid);font-variant-numeric:tabular-nums}
+
+/* ─────────── 내 사이즈 ─────────── */
+.mytog{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);border-bottom:1px solid var(--hair);padding-bottom:2px}
+.mytog:hover,.mytog[aria-expanded="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.mysz{grid-column:1/-1}
+.mysz[hidden]{display:none}
+.mysz>.lbl{display:block;margin-bottom:6px}
+.mysz .row{display:flex;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--hair2)}
+.mysz .row>span{flex:0 0 92px;font-size:9.5px;letter-spacing:.16em;color:var(--soft)}
+.mysz .chips{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:6px}
+.szc{font-size:11px;color:var(--mid);border:1px solid var(--hair);padding:3px 8px;line-height:1.4;
+  font-variant-numeric:tabular-nums;transition:.12s}
+.szc i{font-style:normal;font-size:9.5px;color:var(--soft);margin-left:5px}
+.szc:hover{color:var(--ink);border-color:var(--line)}
+.szc[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.szc[aria-pressed="true"] i{color:var(--hair)}
+
+/* ─────────── 목록 보기 ───────────
+   The same card, laid out as a row: nothing in it is dropped, so the save
+   mark, the keyboard walk and the detail view work unchanged. */
+.grid.list{grid-template-columns:minmax(0,1fr);gap:0;border-top:1px solid var(--hair2)}
+.grid.list article{flex-direction:row;align-items:flex-start;gap:16px;padding:12px 0;
+  border-bottom:1px solid var(--hair2)}
+.grid.list .shot{flex:0 0 64px;width:64px}
+.grid.list .save{top:10px}
+.grid.list .cap{flex:1;min-width:0;padding:0 40px 0 0;display:grid;
+  grid-template-columns:minmax(0,1fr) auto;column-gap:26px;align-items:baseline}
+.grid.list .flags{grid-column:1;margin-bottom:4px;min-height:0}
+.grid.list h3.t{grid-column:1;min-height:0;margin:0 0 3px;-webkit-line-clamp:1}
+.grid.list .p{grid-column:2;grid-row:1/span 2;text-align:right;white-space:nowrap}
+.grid.list .p .alt,.grid.list .p .was{display:block;margin-left:0}
+.grid.list .sub{grid-column:1/-1;margin-top:2px}
+.grid.list article{scroll-margin-top:calc(var(--barh) + 4px)}
+
+/* ─────────── photos ─────────── */
+.qv .pic.multi{grid-template-rows:minmax(0,1fr) auto;place-items:stretch}
+.qv .pic.multi>img{min-height:0}
+.qv .ths{display:flex;gap:6px;padding:0 34px 22px;overflow-x:auto;scrollbar-width:none}
+.qv .ths::-webkit-scrollbar{display:none}
+.qv .ths button{flex:0 0 44px;height:55px;opacity:.55;transition:opacity .12s;background:var(--paper)}
+/* auto margins centre the strip while it fits and give way when it scrolls */
+.qv .ths button:first-child{margin-left:auto}
+.qv .ths button:last-child{margin-right:auto}
+.qv .ths button:hover,.qv .ths button[aria-current="true"]{opacity:1}
+.qv .ths button[aria-current="true"]{outline:1px solid var(--ink);outline-offset:1px}
+.qv .ths img{width:100%;height:100%;object-fit:cover;padding:0}
+.qv .pic .pn{position:absolute;top:14px;right:18px;font-size:9.5px;letter-spacing:.16em;color:var(--soft)}
+
+@media(max-width:767px){
+  .grid.list article{gap:12px;padding:11px 0}
+  .grid.list .shot{flex-basis:56px;width:56px}
+  .grid.list .cap{grid-template-columns:minmax(0,1fr);padding-right:34px}
+  .grid.list h3.t{-webkit-line-clamp:2;font-size:13px}
+  .grid.list .p{grid-column:1;grid-row:auto;text-align:left;white-space:normal}
+  .grid.list .p .alt,.grid.list .p .was{display:inline;margin-left:7px}
+  .mysz .row{flex-direction:column;gap:7px}
+  .mysz .row>span{flex:none}
+  .qv .ths{padding:0 18px 14px}
+}
+/* one column below a laptop: the photo box has no height of its own, and a
+   strip under it left the photo a sliver. Given one, the photo takes the rest. */
+@media(max-width:1023px){ .qv .pic.multi{height:min(60vh,640px);max-height:none} }
+@media(hover:none),(max-width:1023px){
+  .szc{min-height:36px;display:inline-flex;align-items:center}
+  .mytog,.applied .wsv,.wbar button,.watch .wo,.watch .wd{min-height:40px;display:inline-flex;align-items:center}
+  .grid.list .save{top:0}
+  .qv .ths button{flex-basis:48px;height:60px}
+}
+
 @media (prefers-reduced-motion:reduce){ *{transition:none!important;scroll-behavior:auto!important} }
 </style>
 </head>
@@ -512,14 +612,15 @@ h3.t button:focus-visible{outline-offset:2px}
       <button id="qtog" aria-expanded="false" aria-controls="qbox" aria-label="검색">검색</button>
       <button id="stog" aria-pressed="false">저장<span class="n" id="sn"></span></button>
       <button id="ftog" aria-expanded="false">필터<span class="n" id="fn"></span></button>
+      <button id="vtog" aria-pressed="false">목록</button>
       <div class="selwrap"><select id="sort" aria-label="정렬">
         <option value="k-" selected>가격 높은 순</option>
         <option value="k+">가격 낮은 순</option>
         <option value="y+">연도 오래된 순</option>
         <option value="y-">연도 최신 순</option>
-        <option value="new">신규 먼저</option>
+        <option value="new">신규 순</option>
         <option value="drop">가격 내린 순</option>
-        <option value="age">오래 걸린 순</option>
+        <option value="age">오래 남은 순</option>
         <option value="rel" hidden>관련도 순</option>
       </select></div>
     </div>
@@ -527,6 +628,7 @@ h3.t button:focus-visible{outline-offset:2px}
 </div>
 
 <section class="panel" id="panel" hidden>
+  <div class="watch" id="pwatch" hidden></div>
   <div class="pgrid">
     <div class="pcol" style="grid-column:1/-1">
       <span class="lbl">연도<span class="yread" id="yread"></span></span>
@@ -536,10 +638,13 @@ h3.t button:focus-visible{outline-offset:2px}
     <div class="pcol wide"><span class="lbl">모티프</span><div id="fmotif"></div></div>
     <div class="pcol"><span class="lbl">가격</span><div id="fprice"></div>
       <span class="lbl" style="display:block;margin:22px 0 11px">사이즈</span>
-      <input class="sizein" id="fsize" type="text" placeholder="48 · M · 32" autocomplete="off"></div>
-    <div class="pcol"><span class="lbl">판매처</span><div id="fsrc"></div></div>
+      <input class="sizein" id="fsize" type="text" placeholder="48 · M · 32" autocomplete="off">
+      <button class="mytog" id="mytog" aria-expanded="false" aria-controls="mysz">내 사이즈 설정</button></div>
+    <div class="pcol"><span class="lbl">판매처</span><div id="fsrc"></div><p class="snote" id="fsrcnote" hidden></p></div>
     <div class="pcol"><span class="lbl">연도 근거</span><div id="fcert"></div>
       <span class="lbl" style="display:block;margin:22px 0 11px">그 밖에</span><div id="fflag"></div></div>
+    <div class="pcol" id="fmarkcol" hidden><span class="lbl">생산지·라인</span><div id="fmark"></div></div>
+    <div class="pcol mysz" id="mysz" hidden></div>
   </div>
   <div class="seek" id="pseek"></div>
   <div class="prow">
@@ -548,16 +653,17 @@ h3.t button:focus-visible{outline-offset:2px}
   </div>
 </section>
 
+<div class="wbar" id="wbar" role="status" aria-live="polite"></div>
 <div class="applied" id="applied"></div>
 
 <main>
-  <div class="head"><span class="h" id="hlabel">전체</span>
+  <div class="head"><span class="h"><span id="hlabel">전체</span><span class="hn" id="hnote"></span></span>
     <!-- pressing a filter changed the page and announced nothing -->
     <span class="n num" id="count" role="status" aria-live="polite" aria-atomic="true">—</span></div>
   <div class="dist" id="dist" hidden></div>
   <div class="grid" id="grid"></div>
   <div class="more" id="more" hidden><button id="moreBtn">더 보기</button></div>
-  <div class="empty" id="empty" hidden><span class="lbl">결과 없음</span>조건에 맞는 매물이 없습니다.</div>
+  <div class="empty" id="empty" hidden><span class="lbl">결과 없음</span></div>
   <div class="seek" id="seek" hidden></div>
 </main>
 
@@ -582,6 +688,8 @@ h3.t button:focus-visible{outline-offset:2px}
 (function(){
 'use strict';
 var D=null, view=[], shown=0, BATCH=48, ALLNEW=false, saved={}, qvIdx=-1, qvScroll=null;
+// 목록 보기 is how this reader likes to read, not what a link shows: kept here only
+var LISTV=false; try{ LISTV=localStorage.getItem('hlx.view')==='list' }catch(e){}
 var $=function(i){return document.getElementById(i)};
 var won=function(n){return Number(n||0).toLocaleString('ko-KR')};
 var SYM={USD:'$',GBP:'£',EUR:'€',JPY:'¥',KRW:'₩'};
@@ -684,12 +792,116 @@ function alts(t){
 var PRICE=[['~30만',0,300000],['30–100만',300000,1000000],['100–300만',1000000,3000000],['300만~',3000000,Infinity]];
 var CERT={A:'연도 표기',B:'아카이브 표기',C:'연도 미확인'};
 var FLAGLBL={'new':'신규','drop':'가격 내림','multi':'여러 곳 등록','saved':'저장함','gone':'사라진 매물',
-  'since':'지난 방문 이후','sold':'판매 기록'};
+  'since':'지난 방문 이후','sold':'판매 기록','mine':'내 사이즈'};
 var CATORDER=['아우터','데님','팬츠','상의','테일러링','신발','가방·액세서리','기타'];
-var F={y:{},cat:{},motif:{},price:{},src:{},cert:{},flag:{},size:'',q:''};
-var GRP={y:'연도',cat:'분류',motif:'모티프',price:'가격',src:'판매처',cert:'연도 근거',flag:''};
+var F={y:{},cat:{},motif:{},price:{},src:{},cert:{},mark:{},flag:{},size:'',q:''};
+var GRP={y:'연도',cat:'분류',motif:'모티프',price:'가격',src:'판매처',cert:'연도 근거',mark:'생산지·라인',flag:''};
+// every group whose value is a set of picked options, in the order a link writes them
+var FG=['cat','y','motif','price','src','cert','mark','flag'];
 
-try{ saved=JSON.parse(localStorage.getItem('hlx.saved')||'{}') }catch(e){ saved={} }
+/* ── what the title says about where it was made, and in which line ──────
+   Only where the seller spelled it out: 'Made in Italy', 'Italy made',
+   イタリア製. The single word 'Italy' is left alone — as often as it is the
+   country it is the size scale (Italy 40) or the name of a cut (Italian cut),
+   and search still finds it. 'Helmut Lang Jeans' is named as the line only
+   when the garment is something other than a pair of jeans, or the word
+   comes a second time; on a pair of jeans it may just be naming the garment. */
+var MARK=[
+ ['italy','Made in Italy',/made\s*in\s*italy|\bitaly[\s-]*made\b|イタリア製|이탈리아\s*제|이태리\s*제/i],
+ ['austria','Made in Austria',/made\s*in\s*austria|\baustria[\s-]*made\b|オーストリア製|오스트리아\s*제/i],
+ ['usa','Made in USA',/made\s*in\s*(?:the\s*)?(?:u\.?s\.?a\b\.?|u\.?s\b\.?|united\s*states)|\busa[\s-]*made\b|アメリカ製|米国製/i],
+ ['japan','Made in Japan',/made\s*in\s*japan|\bjapan[\s-]*made\b|日本製/i],
+ ['portugal','Made in Portugal',/made\s*in\s*portugal|\bportugal[\s-]*made\b|ポルトガル製/i],
+ ['jeans','Helmut Lang Jeans',null],
+ ['mainline','Mainline',/\bmain[\s-]*line\b|メインライン/i]];
+var MARKLBL={}; MARK.forEach(function(m){ MARKLBL[m[0]]=m[1] });
+var HLJ=/helmut\s*lang\s*jeans\b|ヘルムート\s*ラング\s*ジーンズ/i;
+var NOTJEANS=/jacket|trucker|shirt|\btee\b|hood|sweat|crew\s*neck|polo|turtle|blouse|\btank\b|long\s*sleeve|jersey|fleece|knit|sweater|jumper|cardigan|\bvest\b|coat|parka|anorak|bomber|blazer|belt|\bbag\b|\bcap\b|\bhat\b|skirt|dress|overall|jumpsuit|ジャケット|シャツ|ベルト|バッグ/i;
+function marksOf(t){
+  var out=[];
+  for(var i=0;i<MARK.length;i++){
+    var m=MARK[i];
+    if(m[0]==='jeans'){
+      var h=HLJ.exec(t); if(!h) continue;
+      var after=t.slice(h.index+h[0].length), rest=t.slice(0,h.index)+' '+after;
+      // Trousers or shorts are the line's only when nothing says denim, and not
+      // written straight after it: 'Jeans Pants' is how many sellers say jeans.
+      var legs=/\bpants\b|\btrousers\b|\bshorts\b/i.test(rest) && !/denim/i.test(rest) &&
+        !/^\s*(?:pants|trousers|shorts)\b/i.test(after);
+      if(/\bjeans?\b|ジーンズ/i.test(rest) || NOTJEANS.test(rest) || legs) out.push('jeans');
+    } else if(m[2].test(t)) out.push(m[0]);
+  }
+  return out;
+}
+
+/* ── my size ─────────────────────────────────────────────────────────────
+   The reader's own sizes, kept in this browser. A size is read only as it was
+   written: M is never turned into 48 and a waist is never turned into a
+   letter. Only the writing is tidied — IT 44, 44 IT and EU 44 are the number
+   44; 48R, 48S and 48L are 48 in three lengths; a pair of trousers written
+   32 34, 32x34 or W32 L34 is a 32 waist. US, UK, FR and JP numbers are kept
+   apart: they are other scales, and a 38 in one is not a 38 in another.  */
+var SZGRP={'아우터':'top','상의':'top','테일러링':'top','팬츠':'bot','데님':'bot','신발':'shoe'};
+var SZNAME={top:'상의·아우터',bot:'하의',shoe:'신발'};
+var LETTERS=['XXXS','XXS','XS','S','M','L','XL','XXL','XXXL'];
+var MYSZ={top:[],bot:[],shoe:[]};
+function loadSize(){
+  MYSZ={top:[],bot:[],shoe:[]};
+  try{ var ms=JSON.parse(localStorage.getItem('hlx.mysize')||'null');
+    if(ms && typeof ms==='object') ['top','bot','shoe'].forEach(function(g){
+      if(Array.isArray(ms[g])) MYSZ[g]=ms[g].filter(function(x){ return typeof x==='string' && x.length<24 }).slice(0,40) });
+  }catch(e){}
+}
+loadSize();
+function persistSize(){ try{ localStorage.setItem('hlx.mysize',JSON.stringify(MYSZ)) }catch(e){} }
+function oneSize(p,bottoms){
+  var m;
+  if(LETTERS.indexOf(p)>=0) return p;
+  if(/^(?:ONE SIZE|ONESIZE|OS|FREE|F)$/.test(p)) return 'ONE SIZE';
+  if((m=/^(?:IT|EU)\s*(\d{1,2}(?:\.5)?)$/.exec(p)) || (m=/^(\d{1,2}(?:\.5)?)\s*(?:IT|EU)$/.exec(p))) return m[1];
+  if((m=/^(US|UK|FR|JP)\s*(\d{1,2}(?:\.5)?)$/.exec(p))) return m[1]+' '+m[2];
+  if((m=/^(\d{1,2}(?:\.5)?)\s*(US|UK|FR|JP)$/.exec(p))) return m[2]+' '+m[1];
+  if((m=/^(\d{2})\s*[SRL]$/.exec(p))) return m[1];
+  if(bottoms){
+    if((m=/^W\s*(\d{2})(?:\s*L\s*\d{2})?$/.exec(p)) || (m=/^(\d{2})\s*(?:[X×]\s*)?\d{2}$/.exec(p))) return m[1];
+  }
+  return p;
+}
+function sizeToks(it){
+  var z=it.z; if(!z) return [];
+  z=String(z); try{ z=z.normalize('NFKC') }catch(e){}
+  z=z.toUpperCase().replace(/\s+/g,' ').trim().replace(/\s*INTERNATIONAL$/,'');
+  var bottoms = SZGRP[it.s]==='bot' || it.s==='기타', out=[];
+  z.split(/\s*\/\s*/).forEach(function(p){ if(!p) return; var t=oneSize(p,bottoms); if(t && out.indexOf(t)<0) out.push(t) });
+  return out;
+}
+function mineAny(){ return !!(MYSZ.top.length||MYSZ.bot.length||MYSZ.shoe.length) }
+// 기타 holds dresses, skirts and whatever the reader could not place: any pick may apply
+function mineMatch(it){
+  var toks=it.__z; if(!toks||!toks.length) return false;
+  var g=SZGRP[it.s];
+  var pick = g ? MYSZ[g] : it.s==='기타' ? MYSZ.top.concat(MYSZ.bot,MYSZ.shoe) : null;
+  if(!pick || !pick.length) return false;
+  for(var i=0;i<toks.length;i++) if(pick.indexOf(toks[i])>=0) return true;
+  return false;
+}
+function sizeOrder(a,b){
+  var la=LETTERS.indexOf(a), lb=LETTERS.indexOf(b);
+  if(la>=0||lb>=0) return la<0?1:lb<0?-1:la-lb;
+  var na=/^\d/.test(a), nb=/^\d/.test(b);
+  if(na&&nb) return parseFloat(a)-parseFloat(b);
+  if(na!==nb) return na?-1:1;
+  var sa=a.split(' '), sb=b.split(' ');
+  if(sa[0]!==sb[0]) return sa[0]<sb[0]?-1:1;
+  return (parseFloat(sa[1])||0)-(parseFloat(sb[1])||0);
+}
+
+function loadSaved(){
+  var v=null; try{ v=JSON.parse(localStorage.getItem('hlx.saved')||'{}') }catch(e){}
+  // a stored 'null' or a list took boot down and blamed the data for it
+  saved = v && typeof v==='object' && !Array.isArray(v) ? v : {};
+}
+loadSaved();
 function persist(){ try{ localStorage.setItem('hlx.saved',JSON.stringify(saved)) }catch(e){} }
 
 /* ── time ──────────────────────────────────────────────
@@ -710,7 +922,7 @@ function seenDays(it){                 // how long we have been watching it
 }
 function seenText(it){
   var n=seenDays(it); if(n==null) return '';
-  if(it.x) return n<2 ? '하루만 보임' : won(n)+'일간 보임';
+  if(it.x) return n<2 ? '1일간 보임' : won(n)+'일간 보임';
   return n<2 ? '' : won(n)+'일째';
 }
 
@@ -735,6 +947,24 @@ function initSince(today){
   if(gap!=null && gap>=2) SINCE=prev;
 }
 function md(d){ var m=/^\d{4}-(\d{2})-(\d{2})/.exec(d||''); return m?(+m[1])+'/'+(+m[2]):'' }
+
+/* ── 찾는 물건 ──────────────────────────────────────────────────────────
+   A search the reader keeps, in this browser: the conditions as a link
+   writes them, and the build date it was last looked at. Whatever matches it
+   and was first seen by the sweep after that date is new to this reader.
+   There is no account and no server. Sending these by mail needs the list to
+   live in the repository and a sweep that reads it; that is later work.  */
+var WATCH=[], WMAX=20, WCNT=null, WNEW=null, PENDMINE=null;
+function loadWatch(){
+  var v=null; try{ v=JSON.parse(localStorage.getItem('hlx.watch')||'[]') }catch(e){}
+  WATCH=(Array.isArray(v)?v:[]).filter(function(w){ return w && typeof w.qs==='string' && w.qs && w.qs.length<600 }).slice(0,WMAX)
+    .map(function(w){ return {qs:w.qs, label:String(w.label||w.qs).slice(0,80),
+      seen:/^\d{4}-\d{2}-\d{2}$/.test(w.seen||'')?w.seen:null, at:w.at||null} });
+  WCNT=null;
+}
+loadWatch();
+function persistWatch(){ WCNT=null; try{ localStorage.setItem('hlx.watch',JSON.stringify(WATCH)) }catch(e){} }
+function watchAt(qs){ for(var i=0;i<WATCH.length;i++) if(WATCH[i].qs===qs) return i; return -1 }
 
 /* ── auctions and sale records ─────────────────────────────────────────
    ab = bids at collection time, ae = end time (ISO, with offset).
@@ -791,6 +1021,79 @@ function compsHtml(it){
     (c.d ? ' · '+esc(c.d) : '')+'</p></div>';
 }
 
+/* ── how fresh each source is ──────────────────────────────────────────
+   last = the latest date a listing from this source was first seen by the
+   sweep; START = the first sweep on record. A source whose newest listing is
+   from the first sweep has sent nothing new since — which may be a quiet
+   shop or a collector that has stopped; the page says what it saw and no
+   more. When the pipeline sends sources[].seen (the last day that source
+   answered at all), that is said too.                                    */
+var SRCSTAT={}, START=null;
+function buildSrcStat(){
+  SRCSTAT={}; START=null;
+  for(var i=0;i<D.items.length;i++){ var it=D.items[i];
+    if(it.f && (!START || it.f<START)) START=it.f;
+    // a sale record is not a listing; a listing that has since gone was still
+    // new on the day it came in
+    if(it.so) continue;
+    var s=SRCSTAT[it.r]||(SRCSTAT[it.r]={n:0,last:null,seen:null});
+    if(!it.x) s.n++;
+    if(it.f && (!s.last || it.f>s.last)) s.last=it.f;
+  }
+  (D.sources||[]).forEach(function(x){
+    if(x && x.name && SRCSTAT[x.name] && /^\d{4}-\d{2}-\d{2}$/.test(x.seen||'')) SRCSTAT[x.name].seen=x.seen });
+}
+// nothing new for three builds' worth of days is worth saying; one quiet day is not
+function srcOrder(){ return Object.keys(SRCSTAT).sort(function(a,b){ return SRCSTAT[b].n-SRCSTAT[a].n }) }
+function srcStale(r){
+  var s=SRCSTAT[r]; if(!s || !s.last || !TODAY) return false;
+  var d=daysBetween(s.last,TODAY); return d!=null && d>=3;
+}
+function srcStopped(r){ var s=SRCSTAT[r]; return !!(s && s.seen && TODAY && s.seen<TODAY) }
+function srcFresh(r){
+  var s=SRCSTAT[r]; if(!s) return '';
+  var p=[];
+  if(srcStopped(r)) p.push(md(s.seen)+' 이후 수집 안 됨');
+  else if(srcStale(r)) p.push(md(s.last)+' 이후 신규 없음');
+  else if(s.last) p.push('최근 신규 '+md(s.last));
+  return p.join(' · ');
+}
+
+/* ── customs ────────────────────────────────────────────────────────────
+   관세청 특송물품 통관 안내 (customs.go.kr, read 2026-09-25):
+     personal-use goods of 물품가격 미화 150불 이하 (미국은 200불) clear on a
+     list and are not taxed; 물품가격 includes the tax, inland freight and
+     insurance inside the sending country, and leaves out international
+     freight where it is clearly separate; above 150불 the whole taxable value
+     is taxed, not the part over.
+   우편물 통관 안내: goods of 물품가격 미화 150불 이하 are duty-free.
+   The page compares the seller's price with those thresholds and says no
+   more: the duty rate depends on the heading and the origin, and the
+   customs rate of exchange is not the one this page uses.                */
+var DOMESTIC={'번개장터':1,'후루츠패밀리':1,'당근':1};
+function usdOf(it){
+  if(it.u==='USD' && it.p>0) return {v:it.p, exact:true};
+  var r=D.rates && D.rates.USD;
+  return r>0 && it.k>0 ? {v:it.k/r, exact:false} : null;
+}
+function dutyHtml(it){
+  if(it.so || it.x || DOMESTIC[it.r]) return '';
+  var u=usdOf(it); if(!u) return '';
+  var v=u.v, say, why;
+  // near a line the cents decide, so they are shown; elsewhere whole dollars
+  // (a seller's own price is shown as the seller wrote it)
+  var near=Math.abs(v-150)<1 || Math.abs(v-200)<1;
+  var amt='US$'+(u.exact ? v.toLocaleString('en-US',{maximumFractionDigits:2})
+                : near ? v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})
+                : Math.round(v).toLocaleString('en-US'))+(u.exact?'':' 상당');
+  if(v<=150){ say='면세 기준 이하'; why='판매가 기준' }
+  else if(v<=200){ say='미국발 특송만 면세'; why='판매가 기준' }
+  else { say='과세 대상'; why='면세 기준 US$150 · 미국발 특송 US$200' }
+  // a converted price within a few percent of a line can land on either side
+  if(!u.exact && (Math.abs(v-150)/150<0.05 || Math.abs(v-200)/200<0.05)) why+=' · 환율 따라 달라짐';
+  return '<dt>통관</dt><dd>'+amt+' · '+say+' <span class="basis">'+why+'</span></dd>';
+}
+
 /* ── derive ── */
 // A decade, a span or an approximate year the English reader copied out as a
 // single year: 'Vintage 1990s coat' arrives as e=1990, 'Trench 2001-2005' as
@@ -834,9 +1137,9 @@ function yearClaim(it){
   return bare.test(rest)?null:got;
 }
 // the words under the year in the detail view, by what the seller said
-var CLAIMBASIS={dec:'판매자가 연대만 적음', rng:'판매자가 기간만 적음', about:'판매자가 대략의 해만 적음',
-  bought:'판매자가 구입한 해를 적음 · 만든 해가 아니다', y2k:'판매자가 Y2K라고만 적음', lang:'판매자가 시기만 적음',
-  arch:'판매자가 아카이브라고만 적음', multi:'판매자가 여러 해를 적음 · 어느 해인지 모른다'};
+var CLAIMBASIS={dec:'연대 표기', rng:'기간 표기', about:'대략적 연도 표기',
+  bought:'구입 연도 표기', y2k:'Y2K 표기', lang:'시기 표기',
+  arch:'아카이브 표기', multi:'여러 연도 표기'};
 function yearOf(it){
   var e=it.__e!==undefined?it.__e:it.e;
   if(!e) return null;
@@ -983,11 +1286,11 @@ function buildSeek(){
 }
 
 /* ── filter + sort ── */
-var GROUPS=['y','cat','price','src','cert','motif','flag','size','q'];
+var GROUPS=['y','cat','price','src','cert','motif','mark','flag','size','q'];
 /* The flag group is the one that AND-s inside itself: picking 신규 and
    여러 곳 등록 means both, where picking two motifs means either. Kept as one
    predicate so the facet count and the click that follows it cannot drift. */
-var FLAGV=['new','drop','multi','saved','gone','since','sold'];
+var FLAGV=['new','drop','multi','saved','gone','since','sold','mine'];
 function flagPass(it,fl){
   if(!fl.gone && it.x) return false;          // vanished ones are opt-in
   if(fl.gone && !it.x) return false;
@@ -998,6 +1301,7 @@ function flagPass(it,fl){
   if(fl.drop && !(it.w&&it.w>it.k)) return false;
   if(fl.saved && !saved[it.l]) return false;
   if(fl.multi && !(it.g>1)) return false;
+  if(fl.mine && !mineMatch(it)) return false;
   return true;
 }
 function passes(g,it){
@@ -1010,6 +1314,10 @@ function passes(g,it){
     case 'motif':
       if(!any(F.motif)) return true;
       for(var i=0;i<it.__m.length;i++) if(F.motif[it.__m[i]]) return true;
+      return false;
+    case 'mark':
+      if(!any(F.mark)) return true;
+      for(var j=0;j<it.__mk.length;j++) if(F.mark[it.__mk[j]]) return true;
       return false;
     case 'flag':  return flagPass(it,F.flag);
     case 'size':  return !F.size || (!!it.z && it.z.toLowerCase().indexOf(F.size)>=0);
@@ -1032,7 +1340,9 @@ function sortView(){
     if(s==='y-') return (b.__y||0)-(a.__y||0)||b.k-a.k;
     if(s==='drop') return ((b.w?b.w-b.k:0)-(a.w?a.w-a.k:0))||b.k-a.k;
     if(s==='age') return ((seenDays(b)||0)-(seenDays(a)||0))||b.k-a.k;
-    return (b.n||0)-(a.n||0)||b.k-a.k;
+    // this build's new ones, then whatever the sweep saw first most recently —
+    // so a search opened after a few days away leads with what came in meanwhile
+    return (b.n||0)-(a.n||0)||(a.f===b.f?0:(b.f||'')>(a.f||'')?1:-1)||b.k-a.k;
   });
   for(var i=0;i<view.length;i++) view[i].__v=i;
 }
@@ -1061,7 +1371,7 @@ function card(it){
   var i=it.__i, on=saved[it.l]?' on':'';
   return '<article>'+
     '<button class="shot" data-open="'+i+'" aria-label="크게 보기">'+
-      imgTag(it.i,600)+'</button>'+
+      imgTag(it.i,LISTV?160:600)+'</button>'+
     '<button class="save'+on+'" data-save="'+i+'" aria-label="저장"><span></span></button>'+
     '<div class="cap">'+
       '<div class="flags">'+flagsHtml(it)+'</div>'+
@@ -1113,6 +1423,28 @@ function imgTag(u,w,extra){
   return '<img loading="lazy" decoding="async" src="'+esc(t)+'"'+
     (t!==u?' data-full="'+esc(u)+'"':'')+' alt=""'+(extra||'')+'>';
 }
+/* ── more than one photo ────────────────────────────────────────────────
+   im = every photo the listing carries, in the seller's order, when the sweep
+   collects them; i stays the first. Until a source sends im the detail view
+   shows the one photo it always has.                                      */
+function photosOf(it){
+  var a=[];
+  if(it.i) a.push(it.i);
+  if(Array.isArray(it.im)) it.im.forEach(function(u){
+    if(typeof u==='string' && /^https?:\/\//.test(u) && a.indexOf(u)<0) a.push(u) });
+  return a.slice(0,12);
+}
+function showPhoto(k){
+  var it=qvIdx>=0?view[qvIdx]:(qvKey?D.items[byKey(qvKey)]:null); if(!it) return;
+  var ph=photosOf(it), u=ph[k]; if(!u) return;
+  var im=$('qvimg'); if(!im) return;
+  var t=thumb(u,1200);
+  if(t!==u) im.setAttribute('data-full',u); else im.removeAttribute('data-full');
+  im.src=t;
+  var bs=$('qv').querySelectorAll('.ths button');
+  for(var i=0;i<bs.length;i++){ if(i===k) bs[i].setAttribute('aria-current','true'); else bs[i].removeAttribute('aria-current') }
+  var pn=$('qvpn'); if(pn) pn.textContent=(k+1)+' / '+ph.length;
+}
 function bindImgs(root){
   var ims=root.querySelectorAll('.shot img:not([data-b])');
   for(var i=0;i<ims.length;i++){(function(im){
@@ -1130,7 +1462,7 @@ function bindImgs(root){
 }
 function preload(from,n){
   for(var i=from;i<Math.min(from+n,view.length);i++){
-    if(view[i].i){ var im=new Image(); im.src=thumb(view[i].i,600) }
+    if(view[i].i){ var im=new Image(); im.src=thumb(view[i].i,LISTV?160:600) }
   }
 }
 // how many would be left if this one condition were lifted
@@ -1145,27 +1477,25 @@ function countWithout(g,v){
 }
 function buildEmpty(){
   var rows=[],g,ks,i;
-  ['y','cat','motif','price','src','cert','flag'].forEach(function(gg){
+  ['y','cat','motif','price','src','cert','mark','flag'].forEach(function(gg){
     ks=keys(F[gg]);
     for(i=0;i<ks.length;i++) rows.push([gg,ks[i],tokLabel(gg,ks[i])]);
   });
   if(F.size) rows.push(['size','','사이즈 '+F.size]);
   if(F.q && QT.length) rows.push(['q','','“'+F.q+'”']);
-  if(!rows.length){ $('empty').innerHTML='<span class="lbl">결과 없음</span><p>조건에 맞는 매물이 없습니다.</p>'; return }
+  if(!rows.length){ $('empty').innerHTML='<span class="lbl">결과 없음</span>'; return }
   // only offer a condition whose removal actually brings something back
   var useful=rows.map(function(r){ return { g:r[0], v:r[1], lab:r[2], n:countWithout(r[0],r[1]) } })
                  .filter(function(r){ return r.n>0 })
                  .sort(function(a,b){ return b.n-a.n });
   var h='<span class="lbl">결과 없음</span>';
   if(useful.length){
-    h+='<p>걸어 둔 조건 중 하나를 빼면 다시 나온다.</p><div class="drop">';
+    h+='<div class="drop">';
     useful.forEach(function(r){
       h+='<button data-off="'+r.g+'" data-v="'+esc(r.v)+'">'+esc(r.lab)+
          ' 빼기<span>'+won(r.n)+'건</span></button>';
     });
     h+='</div>';
-  } else {
-    h+='<p>조건을 하나만 빼서는 나오지 않는다. 두 개 이상 겹쳐 있다.</p>';
   }
   h+='<button class="rst" id="emptyclear">모두 해제</button>';
   $('empty').innerHTML=h;
@@ -1196,12 +1526,21 @@ function apply(keepScroll,pushHist){
   for(var bi=0;bi<D.items.length;bi++) if(flagPass(D.items[bi],bf)) base++;
   $('count').textContent=won(n)+(n!==base?' / '+won(base):'')+'건';
   var act=keys(F.y).length+keys(F.cat).length+keys(F.motif).length+keys(F.price).length+
-          keys(F.src).length+keys(F.cert).length+keys(F.flag).length+(F.size?1:0)+(QT.length?1:0);
+          keys(F.src).length+keys(F.cert).length+keys(F.mark).length+keys(F.flag).length+(F.size?1:0)+(QT.length?1:0);
   $('fn').textContent=act?' '+act:'';
   var cat=keys(F.cat);
-  $('hlabel').textContent = cat.length===1?cat[0] : (F.flag.saved?'저장함':'전체');
+  // a view that is one of the reader's kept searches is named as that
+  var fq=filterQs(), wi=fq?watchAt(fq):-1;
+  $('hlabel').textContent = wi>=0 ? WATCH[wi].label : cat.length===1?cat[0] : (F.flag.saved?'저장함':'전체');
+  if(WNEW && WNEW.qs!==fq) WNEW=null;
+  // by a reload, Back, a bookmark or the tabs — not only through the bar —
+  // the view says what arrived since, before it counts as seen
+  if(wi>=0 && !WNEW){ var wc=watchCounts()[wi]; if(wc && wc.nw) WNEW={qs:fq, since:WATCH[wi].seen, n:wc.nw} }
+  $('hnote').textContent = wi<0 ? '' : WNEW && WNEW.n ? '저장한 검색 · '+(WNEW.since?md(WNEW.since)+' 이후 ':'')+'신규 '+won(WNEW.n)+'건' : '저장한 검색';
+  if(wi>=0) touchWatch(wi);
   syncSaved();
   buildApplied();
+  buildWatch();
   buildPanel();
   buildDist();
   if(!view.length) buildEmpty();
@@ -1222,12 +1561,13 @@ function tokLabel(g,v){
   if(g==='y') return v==='none'?'연도 미표기':v;
   if(g==='motif') return motifLbl(v);
   if(g==='cert') return own.call(CERT,v)?CERT[v]:v;
+  if(g==='mark') return own.call(MARKLBL,v)?MARKLBL[v]:v;
   if(g==='flag') return own.call(FLAGLBL,v)?FLAGLBL[v]:v;
   return v;
 }
 function buildApplied(){
   var h='',g,ks,i;
-  var groups=['y','cat','motif','price','src','cert','flag'];
+  var groups=['y','cat','motif','price','src','cert','mark','flag'];
   for(var gi=0;gi<groups.length;gi++){
     g=groups[gi]; ks=keys(F[g]);
     for(i=0;i<ks.length;i++){
@@ -1238,17 +1578,141 @@ function buildApplied(){
   if(F.size) h+='<button class="tok" data-off="size" data-v="">사이즈 '+esc(F.size)+'<i>×</i></button>';
   // a query of nothing but the brand's name is not a condition on anything
   if(F.q && QT.length) h+='<button class="tok" data-off="q" data-v="">“'+esc(F.q)+'”<i>×</i></button>';
-  if(h) h+='<button class="rst" id="rst">모두 해제</button>';
+  if(h){
+    // keep this set of conditions as a search to come back to
+    var fq=filterQs(), wi=fq?watchAt(fq):-1;
+    if(fq) h+= wi>=0
+      ? '<button class="wsv" id="wsv" aria-pressed="true">저장된 검색</button>'
+      : WATCH.length>=WMAX
+        ? '<button class="wsv" id="wsv" disabled>검색 저장 최대 '+WMAX+'개</button>'
+        : '<button class="wsv" id="wsv" aria-pressed="false">검색 저장</button>';
+    h+='<button class="rst" id="rst">모두 해제</button>';
+  }
   $('applied').innerHTML=h;
   $('applied').classList.toggle('on',!!h);
+}
+
+/* ── 찾는 물건: reading and keeping ── */
+// the conditions alone, in one spelling: two clicks in another order are the
+// same search, and the sort is how it is read, not what it finds
+function filterQs(){
+  var p=[];
+  FG.forEach(function(g){
+    var k=keys(F[g]).filter(function(v){ return !(g==='flag' && v==='since') }); if(!k.length) return;
+    var vals = g==='y' ? packYears(k) : k.map(function(v){return slugFor(g,v)}).sort();
+    p.push(PARAM[g]+'='+vals.map(encodeURIComponent).join(','));
+  });
+  if(F.size) p.push('size='+encodeURIComponent(F.size));
+  if(F.q && QT.length) p.push('q='+encodeURIComponent(F.q));
+  return p.join('&');
+}
+function stateLabel(){
+  var p=[];
+  keys(F.cat).forEach(function(v){ p.push(v) });
+  var ys=keys(F.y); if(ys.length) p.push(packYears(ys).map(function(y){ return y==='none'?'연도 미표기':y }).join(', '));
+  ['motif','price','src','cert','mark','flag'].forEach(function(g){ keys(F[g]).forEach(function(v){
+    if(!(g==='flag'&&v==='since')) p.push(tokLabel(g,v)) }) });
+  if(F.size) p.push('사이즈 '+F.size);
+  if(F.q && QT.length) p.push('“'+F.q+'”');
+  var s=p.join(' · ');
+  return s.length>60 ? s.slice(0,58)+'…' : s;
+}
+// the other searches are read with the same code as the page's own, by
+// lending them the filter state for the length of one count
+function withState(st,fn){
+  var kF=F, kQ=F.q, kT=QT, kX=QX;
+  F={y:st.g.y,cat:st.g.cat,motif:st.g.motif,price:st.g.price,src:st.g.src,cert:st.g.cert,
+     mark:st.g.mark,flag:st.g.flag,size:st.size,q:''};
+  try{ setQuery(st.q); return fn() }
+  finally{ F=kF; F.q=kQ; QT=kT; QX=kX }
+}
+function watchCounts(){
+  if(WCNT) return WCNT;
+  WCNT=WATCH.map(function(w){
+    var st=parseQs(w.qs);
+    // it asks for the reader's sizes and none are kept: there is nothing to
+    // count it by, and announcing the whole archive under its name would lie
+    if(st.g.flag.mine && !mineAny()) return {n:0, nw:0, needSize:true};
+    return withState(st,function(){
+      var n=0, nw=0;
+      for(var i=0;i<D.items.length;i++){ var it=D.items[i];
+        if(!match(it)) continue; n++;
+        if(w.seen && it.f && it.f>w.seen && !it.x && !it.so) nw++ }
+      return {n:n, nw:nw};
+    });
+  });
+  return WCNT;
+}
+function touchWatch(i){
+  var w=WATCH[i]; if(!w || !TODAY) return;
+  if(!w.seen || w.seen<TODAY){ w.seen=TODAY; persistWatch() }
+}
+function toggleWatch(){
+  var fq=filterQs(); if(!fq) return;
+  var wi=watchAt(fq);
+  if(wi>=0) WATCH.splice(wi,1);
+  else if(WATCH.length<WMAX) WATCH.unshift({qs:fq, label:stateLabel(), seen:TODAY, at:TODAY});
+  WNEW=null; persistWatch();
+  var cat=keys(F.cat), wj=watchAt(fq);
+  $('hlabel').textContent = wj>=0 ? WATCH[wj].label : cat.length===1?cat[0] : (F.flag.saved?'저장함':'전체');
+  $('hnote').textContent = wj>=0 ? '저장한 검색' : '';
+  buildApplied(); buildWatch();
+  var b=$('wsv'); if(b) try{ b.focus({preventScroll:true}) }catch(e){}
+}
+function buildWatch(){
+  var cs=watchCounts(), fq=filterQs(), bar='', list='', fresh=0;
+  WATCH.forEach(function(w,i){
+    var c=cs[i]||{n:0,nw:0};
+    list+='<div class="wr"><button class="wo" data-wopen="'+i+'">'+esc(w.label)+'</button>'+
+      (c.needSize?'<span class="c">사이즈 설정 필요</span>':'<span class="c">'+won(c.n)+'건</span>')+
+      (c.nw?'<span class="nw">신규 '+won(c.nw)+'</span>':'')+
+      '<button class="wd" data-wdel="'+i+'" aria-label="'+esc(w.label)+' 삭제">×</button></div>';
+    if(c.nw && w.qs!==fq){ fresh++;
+      if(fresh<=4) bar+='<button data-wopen="'+i+'">'+esc(w.label)+'<b>신규 '+won(c.nw)+'</b></button>' }
+  });
+  if(fresh>4) bar+='<span class="wx">외 '+won(fresh-4)+'개</span>';
+  // the bar is a live region: rewrite it only when what it says has changed,
+  // or a screen reader hears the same line again on every filter click
+  var bh = bar ? '<span class="lbl">저장한 검색</span>'+bar : '';
+  if($('wbar').innerHTML!==bh) $('wbar').innerHTML=bh;
+  $('wbar').classList.toggle('on',!!bar);
+  var pw=$('pwatch');
+  if(WATCH.length){
+    pw.innerHTML='<span class="lbl">저장한 검색 '+won(WATCH.length)+'</span>'+list;
+    pw.hidden=false;
+  } else { pw.innerHTML=''; pw.hidden=true }
+}
+function openWatch(i){
+  var w=WATCH[i]; if(!w) return;
+  var c=watchCounts()[i]||{nw:0};
+  WNEW = c.nw ? {qs:w.qs, since:w.seen, n:c.nw} : null;
+  urlLock=true; try{ applyQuery(w.qs) } finally { urlLock=false }
+  // what came in since last time leads
+  if(c.nw) $('sort').value='new';
+  if(c.needSize){
+    // a search for the reader's sizes, with none kept: the rest of it applies,
+    // and the size picker opens so the missing part can be given
+    buildCats(); buildPanel(); apply(false,true);
+    PENDMINE=filterQs();   // the first size picked here completes the search
+    if(!$('panel').classList.contains('on')) $('ftog').click();
+    if($('mysz').hidden) $('mytog').click();
+    var z=$('mysz').querySelector('.szc'); if(z) try{ z.focus({preventScroll:true}) }catch(e){}
+    return;
+  }
+  if($('panel').classList.contains('on')) $('pdone').click();
+  buildCats(); buildPanel(); apply(false,true);
+  window.scrollTo({top:0,behavior:'auto'});
+  // the button pressed has just been redrawn or hidden; land on the first result
+  var f=document.querySelector('#grid .shot')||$('ftog');
+  if(f) try{ f.focus({preventScroll:true}) }catch(e){}
 }
 
 // One quiet line of what the current slice actually contains — the research
 // readout. No separate page, no mode: it just describes what is on screen.
 function buildDist(){
   var el=$('dist');
-  var narrowed = any(F.y)||any(F.motif)||any(F.cat)||any(F.cert)||any(F.src)||
-                 any(F.price)||QT.length||F.size||F.flag.saved||F.flag.multi;
+  var narrowed = any(F.y)||any(F.motif)||any(F.cat)||any(F.cert)||any(F.src)||any(F.mark)||
+                 any(F.price)||QT.length||F.size||F.flag.saved||F.flag.multi||F.flag.mine;
   if(!narrowed || view.length<2){ el.hidden=true; el.innerHTML=''; return }
   var lo=9999,hi=0,dated=0,sec={},yc={},i,it;
   for(i=0;i<view.length;i++){
@@ -1279,7 +1743,7 @@ function buildDist(){
     for(i=0;i<view.length;i++){ var mm=view[i].__m;
       for(j=0;j<mm.length;j++) if(mm[j]!==mk[0]) co[mm[j]]=(co[mm[j]]||0)+1 }
     var cl=Object.keys(co).sort(function(a,b){return co[b]-co[a]});
-    if(cl.length) rows.push('<span class="lead">함께 나타남</span>'+cl.map(function(k){
+    if(cl.length) rows.push('<span class="lead">함께 나온 모티프</span>'+cl.map(function(k){
       return '<span class="yv">'+esc(motifLbl(k))+' <span class="q">'+won(co[k])+'</span></span>' }).join(''));
   }
   if(!rows.length){ el.hidden=true; el.innerHTML=''; return }
@@ -1320,7 +1784,7 @@ function histHtml(it){
   var first = haveNat ? nat(f0) : f0[1], last = haveNat ? nat(l0) : l0[1];
   var net='';
   if(!canJudge){
-    net='<div class="net">원화 환산가만 기록된 구간이다. 판매자가 올렸는지 내렸는지는 알 수 없다</div>';
+    net='<div class="net">원화 환산가만 기록됨</div>';
   } else if(first!==last && first>0){
     var amt = haveNat ? sym+Number(Math.abs(last-first)).toLocaleString('en-US') : won(Math.abs(last-first));
     net='<div class="net">'+(last<first?'내림 ':'오름 ')+amt+' · '+
@@ -1382,9 +1846,13 @@ function renderQV(it){
         '</b></a>'}).join('')+ gap +
       '</div>';
   }
+  var ph=photosOf(it);
   $('qv').innerHTML=
     // the detail view shows the photo large, so it asks for a large one
-    '<div class="pic">'+(it.i?imgTag(it.i,1200):'')+'</div>'+
+    '<div class="pic'+(ph.length>1?' multi':'')+'">'+(ph.length?imgTag(ph[0],1200,' id="qvimg"'):'')+
+      (ph.length>1?'<span class="pn" id="qvpn">1 / '+ph.length+'</span><div class="ths">'+ph.map(function(u,k){
+        return '<button data-ph="'+k+'" aria-label="사진 '+(k+1)+'"'+(k===0?' aria-current="true"':'')+'>'+imgTag(u,160)+'</button>' }).join('')+'</div>':'')+
+    '</div>'+
     '<div class="info">'+
       '<div class="flags">'+flagsHtml(it)+'</div>'+
       '<h2>'+esc(it.t)+'</h2>'+
@@ -1394,19 +1862,25 @@ function renderQV(it){
         '<dt>분류</dt><dd>'+esc(it.s)+'</dd>'+
         '<dt>연도</dt><dd>'+(it.__e?esc(it.__e)+' <span class="basis">판매자 표기</span>'
           :it.__yc?(it.__yc.k==='arch'?'연도 미상':esc(it.__yc.v))+' <span class="basis">'+(CLAIMBASIS[it.__yc.k]||CLAIMBASIS.arch)+'</span>'
-          :(it.c==='A'?'연도 표기 <span class="basis">판매자가 적음 · 판매 페이지에서 확인</span>'
-          :(it.c==='B'?'연도 미상 <span class="basis">판매자가 아카이브라고만 적음</span>'
-                      :'연도 미확인 <span class="basis">상품명에 근거 없음</span>')))+'</dd>'+
+          :(it.c==='A'?'연도 표기 <span class="basis">판매 페이지 확인</span>'
+          :(it.c==='B'?'연도 미상 <span class="basis">아카이브 표기</span>'
+                      :'연도 미확인 <span class="basis">표기 없음</span>')))+'</dd>'+
+        (it.__mk.length?'<dt>표기</dt><dd>'+it.__mk.map(function(k){ return esc(MARKLBL[k]) }).join(' · ')+
+          ' <span class="basis">상품명</span></dd>':'')+
         '<dt>판매처</dt><dd>'+esc(it.r)+'</dd>'+
+        dutyHtml(it)+
         (aucText(it)?'<dt>경매</dt><dd>'+aucText(it)+
-          (endText(it)?' <span class="basis">'+esc(endText(it))+' 마감 · 입찰 수는 수집 시점 기준</span>':'')+'</dd>':'')+
+          (endText(it)?' <span class="basis">'+esc(endText(it))+' 마감 · 수집 시점 기준</span>':'')+'</dd>':'')+
         (it.so?'<dt>'+esc(it.sk||'판매 완료')+'</dt><dd>'+esc(it.so)+
-          ' <span class="basis">'+esc(it.r)+'가 공개한 기록이다. 지금 살 수 있는 매물이 아니다</span></dd>':'')+
+          ' <span class="basis">구매 불가 · '+esc(it.r)+' 판매 기록</span></dd>':'')+
         (it.f&&!it.so?'<dt>관측</dt><dd>'+
           (it.x&&it.ls
             ? esc(it.f)+' — '+esc(it.ls)+
-              ' <span class="basis">'+seenText(it)+' · 이후 목록에서 사라졌다. 팔렸는지 내렸는지는 알 수 없다</span>'
-            : esc(it.f)+' 부터'+(seenText(it)?' <span class="basis">'+seenText(it)+'</span>':''))+
+              ' <span class="basis">'+seenText(it)+' · 목록에서 사라짐</span>'
+            : srcStopped(it.r)
+              // the source stopped answering: say when it was last seen, not how long
+              ? esc(it.f)+' — '+esc(SRCSTAT[it.r].seen)+' <span class="basis">'+esc(md(SRCSTAT[it.r].seen))+' 이후 수집 안 됨</span>'
+              : esc(it.f)+'부터'+(seenText(it)?' <span class="basis">'+seenText(it)+'</span>':''))+
           '</dd>':'')+
       '</dl>'+
       histHtml(it)+ compsHtml(it)+
@@ -1461,7 +1935,7 @@ function closeQV(fromPop){
 function toggleSave(i){
   var it=D.items[i];
   if(saved[it.l]) delete saved[it.l]; else saved[it.l]=1;
-  persist();
+  persist(); WCNT=null;
   var btns=document.querySelectorAll('[data-save="'+i+'"]');
   for(var k=0;k<btns.length;k++){
     if(btns[k].classList.contains('save')) btns[k].classList.toggle('on',!!saved[it.l]);
@@ -1496,7 +1970,7 @@ function toggleSave(i){
 var FACET={};
 var TRIAL={};
 function buildFacets(){
-  var G=['y','cat','price','src','cert','motif','flag'];
+  var G=['y','cat','price','src','cert','motif','mark','flag'];
   var f={}; G.forEach(function(g){f[g]={}});
   // Flags AND each other, so each one is counted against the selection it
   // describes: for an unpressed flag that is the selection plus it — what
@@ -1524,6 +1998,7 @@ function buildFacets(){
     if(!only||only==='src'){ f.src[it.r]=(f.src[it.r]||0)+1 }
     if(!only||only==='cert'){ f.cert[it.__c]=(f.cert[it.__c]||0)+1 }
     if(!only||only==='motif'){ for(j=0;j<it.__m.length;j++) f.motif[it.__m[j]]=(f.motif[it.__m[j]]||0)+1 }
+    if(!only||only==='mark'){ for(j=0;j<it.__mk.length;j++) f.mark[it.__mk[j]]=(f.mark[it.__mk[j]]||0)+1 }
     if(!only||only==='flag'){
       // Every other group OR-s inside itself, so "passes everything but this
       // group" is the right thing to count. Flags AND, and counting them that
@@ -1557,7 +2032,41 @@ function buildFlags(){
   if(f.gone||F.flag.gone) h+=opt('flag','gone','사라진 매물',f.gone||0);
   if(SINCE && (f.since||F.flag.since)) h+=opt('flag','since','지난 방문('+md(SINCE)+') 이후',f.since||0);
   if(f.sold||F.flag.sold) h+=opt('flag','sold','판매 기록',f.sold||0);
+  // shown once the reader has said what their sizes are
+  if(mineAny()||F.flag.mine) h+=opt('flag','mine','내 사이즈',f.mine||0);
   $('fflag').innerHTML=h;
+}
+/* The picker lists only sizes that are actually written on a listing in
+   that kind of garment, with how many; a bag has no size to pick. */
+function buildMySize(){
+  var box=$('mysz'); if(box.hidden) return;
+  var cnt={top:{},bot:{},shoe:{}};
+  for(var i=0;i<D.items.length;i++){ var it=D.items[i]; if(it.x||it.so) continue;
+    var g=SZGRP[it.s]; if(!g) continue;
+    it.__z.forEach(function(t){ cnt[g][t]=(cnt[g][t]||0)+1 }) }
+  var h='<span class="lbl">내 사이즈</span>';
+  ['top','bot','shoe'].forEach(function(g){
+    var ks=Object.keys(cnt[g]);
+    MYSZ[g].forEach(function(t){ if(ks.indexOf(t)<0) ks.push(t) });   // a pick with no listing today stays pickable
+    ks.sort(sizeOrder);
+    h+='<div class="row"><span>'+esc(SZNAME[g])+'</span><div class="chips">'+ks.map(function(t){
+      return '<button class="szc" data-szg="'+g+'" data-szv="'+esc(t)+'" aria-pressed="'+(MYSZ[g].indexOf(t)>=0?'true':'false')+'">'+
+        esc(t)+'<i>'+won(cnt[g][t]||0)+'</i></button>' }).join('')+'</div></div>';
+  });
+  box.innerHTML=h;
+}
+function pickSize(g,v){
+  var a=MYSZ[g], k=a.indexOf(v);
+  if(k>=0) a.splice(k,1); else if(a.length<40) a.push(v);
+  persistSize(); WCNT=null;
+  var b=$('mysz').querySelector('[data-szg="'+g+'"][data-szv="'+String(v).replace(/"/g,'\\"')+'"]');
+  if(b) b.setAttribute('aria-pressed',a.indexOf(v)>=0?'true':'false');
+  // with nothing picked there is nothing to filter by; the condition goes with it
+  if(!mineAny() && F.flag.mine) delete F.flag.mine;
+  // opened from a kept 내 사이즈 search that had no sizes to go on: now it has
+  if(PENDMINE!==null && mineAny()){ if(PENDMINE===filterQs()) F.flag.mine=1; PENDMINE=null }
+  if(F.flag.mine || !mineAny()) apply(true,false);
+  else { buildFacets(); buildFlags(); buildWatch() }
 }
 function buildCats(){
   var cats=tally(function(it){return it.s});
@@ -1567,11 +2076,15 @@ function buildCats(){
   $('cats').innerHTML=h;
   if(CATSEND) CATSEND();
 }
-var ORDER={motif:[],src:[]};
+var ORDER={motif:[],src:[],mark:[],markN:{}};
 function buildOrder(){
   var mo=tally(function(it){return it.__m}), sr=tally(function(it){return it.r});
   ORDER.motif=MOTIF.filter(function(m){return mo[m[0]]}).sort(function(a,b){return mo[b[0]]-mo[a[0]]});
   ORDER.src=Object.keys(sr).sort(function(a,b){return sr[b]-sr[a]});
+  // a label on one or two listings is noise in a filter; search still finds them
+  var mk=tally(function(it){return it.__mk});
+  ORDER.markN=mk;
+  ORDER.mark=MARK.filter(function(m){return mk[m[0]]}).sort(function(a,b){return mk[b[0]]-mk[a[0]]});
 }
 function buildPanel(){
   // This once bailed out whenever anything in the panel had focus, to protect
@@ -1594,6 +2107,22 @@ function buildPanel(){
 
   var sr=FACET.src;
   $('fsrc').innerHTML=ORDER.src.map(function(k){return opt('src',k,k,sr[k]||0)}).join('');
+  // where nothing new has come in for days, say so where the source is picked
+  var stop=ORDER.src.filter(srcStopped), stale=ORDER.src.filter(function(r){ return srcStale(r) && !srcStopped(r) });
+  var sn=[];
+  if(stop.length) sn.push('수집 중단 · '+stop.map(function(r){ return esc(r)+'('+md(SRCSTAT[r].seen)+')' }).join(' · '));
+  if(stale.length){
+    var byLast={}; stale.forEach(function(r){ var l=SRCSTAT[r].last; (byLast[l]=byLast[l]||[]).push(r) });
+    Object.keys(byLast).sort().forEach(function(l){
+      sn.push(md(l)+' 이후 신규 없음 · '+byLast[l].map(esc).join(' · ')) });
+  }
+  $('fsrcnote').innerHTML=sn.join('<br>'); $('fsrcnote').hidden=!sn.length;
+
+  var mk=FACET.mark, anyMark=false;
+  $('fmark').innerHTML=ORDER.mark.map(function(m){
+    if(!(ORDER.markN[m[0]]>=3) && !F.mark[m[0]]) return '';
+    anyMark=true; return opt('mark',m[0],m[1],mk[m[0]]||0) }).join('');
+  $('fmarkcol').hidden=!anyMark;
 
   var ce=FACET.cert;
   $('fcert').innerHTML=['A','B','C'].map(function(k){return opt('cert',k,CERT[k],ce[k]||0)}).join('');
@@ -1686,7 +2215,7 @@ var CATSLUG={'아우터':'outer','데님':'denim','팬츠':'pants','상의':'top
 var PRICESLUG={'~30만':'under-300k','30–100만':'300k-1m','100–300만':'1m-3m','300만~':'over-3m'};
 var CERTSLUG={A:'confirmed',B:'archive',C:'unknown'};
 function unslug(map,v){ for(var k in map) if(map[k]===v) return k; return v }
-var PARAM={y:'year',cat:'category',motif:'motif',price:'price',src:'source',cert:'year-basis',flag:'show'};
+var PARAM={y:'year',cat:'category',motif:'motif',price:'price',src:'source',cert:'year-basis',mark:'label',flag:'show'};
 function slugFor(g,v){
   if(g==='cat') return CATSLUG[v]||v;
   if(g==='price') return PRICESLUG[v]||v;
@@ -1722,7 +2251,7 @@ function unpackYears(parts){
 }
 function buildQuery(){
   var p=[];
-  ['cat','y','motif','price','src','cert','flag'].forEach(function(g){
+  FG.forEach(function(g){
     // 지난 방문 이후 means this browser's last visit; a link that carried it
     // would open, for anyone else, on a filter they cannot see or turn off
     var k=keys(F[g]).filter(function(v){ return !(g==='flag' && v==='since') }); if(!k.length) return;
@@ -1750,49 +2279,61 @@ function writeUrl(push){
     lastFilterQs=stripItem(qs);
   }catch(e){ histOK=false; }
 }
-function applyQuery(qs){
-  ['y','cat','motif','price','src','cert','flag'].forEach(function(g){F[g]={}});
-  // The address now says what is being shown, so a keystroke still waiting out
-  // its 170ms is stale. Left running, a Back pressed mid-typing landed ~170ms
-  // later as a search the field no longer shows, and wrote it over the entry
-  // the user had just returned to.
-  clearTimeout(qt);
-  F.size='';setQuery('');
-  var sortWanted=null;
+// A link read into filter state without touching the page — applyQuery uses
+// it for the address, and 찾는 물건 uses it to count a kept search.
+function parseQs(qs){
+  var st={g:{}, size:'', q:'', sort:null};
+  FG.forEach(function(g){ st.g[g]={} });
   if(qs){
     qs.replace(/^[?#]/,'').split('&').forEach(function(kv){
       var i=kv.indexOf('='); if(i<0) return;
       var k=kv.slice(0,i), raw=kv.slice(i+1);
       var v=dec(raw.replace(/\+/g,' '));
-      if(k==='size'){F.size=v.toLowerCase();return}
-      if(k==='q'){setQuery(v.toLowerCase().trim());return}
+      if(k==='size'){st.size=v.toLowerCase();return}
+      if(k==='q'){st.q=v.toLowerCase().trim();return}
       if(k==='sort'){
         // Read from the RAW parameter, not from v: two of the eight sort
         // values end in a plus (k+, y+) and the form-encoding substitution
         // above turns that into a space, so 가격 낮은 순 and 연도 오래된 순
         // silently came back as 가격 높은 순 on reload and on Back.
-        sortWanted=dec(raw);
+        st.sort=dec(raw);
         return;
       }
       var g=null; for(var gk in PARAM) if(PARAM[gk]===k) g=gk;
       // own properties only: ?__proto__=x reached Object.prototype, and then
       // every group read as active and nothing matched anything, for good
-      if(!g && Object.prototype.hasOwnProperty.call(F,k) && F[k] && typeof F[k]==='object') g=k;
+      if(!g && Object.prototype.hasOwnProperty.call(st.g,k)) g=k;
       if(!g) return;
       var parts=v.split(',').filter(Boolean);
       if(g==='y') parts=unpackYears(parts);
       parts.forEach(function(x){
         var val=unslugFor(g,x);
         // ?show=constructor drew a chip reading "function Object() { [native
-        // code] }" and filtered nothing. These two groups have a closed set of
+        // code] }" and filtered nothing. These groups have a closed set of
         // values; anything else is dropped rather than shown as a condition.
         if(g==='flag' && FLAGV.indexOf(val)<0) return;
         if(g==='flag' && val==='since' && !SINCE) return;
         if(g==='cert' && !own.call(CERT,val)) return;
-        F[g][val]=1;
+        if(g==='mark' && !own.call(MARKLBL,val)) return;
+        st.g[g][val]=1;
       });
     });
   }
+  return st;
+}
+function applyQuery(qs){
+  // The address now says what is being shown, so a keystroke still waiting out
+  // its 170ms is stale. Left running, a Back pressed mid-typing landed ~170ms
+  // later as a search the field no longer shows, and wrote it over the entry
+  // the user had just returned to.
+  clearTimeout(qt);
+  var st=parseQs(qs);
+  FG.forEach(function(g){ F[g]=st.g[g] });
+  // 내 사이즈 in a link means the sizes of whoever opens it; with none kept
+  // here it would filter everything away, so it is left off
+  if(F.flag.mine && !mineAny()) delete F.flag.mine;
+  F.size=st.size; setQuery(st.q);
+  var sortWanted=st.sort;
   $('q').value=F.q;
   // This could only ever OPEN the search. Going back out of a search left the
   // field open and empty, and on a phone the open field takes the whole row,
@@ -1884,6 +2425,8 @@ function boot(d){
     it.__m=[]; var mw='';
     var tk=it.t||''; try{ tk=tk.normalize('NFKC') }catch(e){}
     for(var j=0;j<MOTIF.length;j++) if(MOTIF[j][2].test(tk)){ it.__m.push(MOTIF[j][0]); mw+=' '+MOTIF[j][0]+' '+MOTIF[j][1] }
+    it.__mk=marksOf(tk);
+    it.__z=sizeToks(it);
     // fields kept apart so a hit can say which one it came from, and rank by it
     it.__t=nrm(it.t);
     it.__mw=nrm(mw);
@@ -1894,6 +2437,7 @@ function boot(d){
   var c=d.counts;
   ALLNEW = c.fresh >= c.items;
   initSince(TODAY);
+  buildSrcStat();
   $('kicker').textContent = d.issueLabel+' · '+d.date;
   // counted here, by the reading the filters use, so the masthead and the filters
   // cannot disagree about a listing; same-model duplicates count, as the pipeline counts them
@@ -1910,18 +2454,26 @@ function boot(d){
   $('tally').innerHTML=t.join(' &nbsp;·&nbsp; ');
   // a build that says where it looked replaces the fixed sentence below
   var srcNote = d.sources && d.sources.length ? d.sources.map(function(x){
-      return esc(x.name)+(x.how?' ('+esc(x.how)+')':'') }).join(' · ')+
-      '. 자동 수집이 되지 않는 곳은 필터판과 목록 끝의 ‘다른 곳에서 찾기’에서 그 플랫폼의 검색으로 바로 간다.' : null;
+      return esc(x.name)+(x.how?' ('+esc(x.how)+')':'') }).join(' · ') : null;
   $('colo').innerHTML=
     (srcNote?'<div><span class="lbl">수집</span><p>'+srcNote+'</p></div>':'')+
-    (srcNote?'':'<div><span class="lbl">수집</span><p>Grailed 전량, eBay 검색어 35종, Depop 검색어 38종, ENDYMA · Morphine · Archive Store · The Elephant 재고 API에서 모았다. Depop은 매물명이 주소 길이에 맞춰 잘려 있어 이름이 문장 중간에서 끊길 수 있다. 판매자가 태그로 다른 브랜드에 헬무트 랭을 적어 둔 것이 많아, 판매자가 지정한 브랜드가 헬무트 랭인 것만 남겼다. Vestiaire Collective는 봇 차단이 걸려 있어 아카이브 키워드 검색분만 실었다. The RealReal · Vinted · Gem · 번개장터는 자동 수집이 막혀 있다.</p></div>')+
-    '<div><span class="lbl">연도</span><p>상품명에 연도나 시즌이 적힌 것만 그대로 표기했다. ‘1990s’·‘2001-2005’·‘c. 1997’처럼 연대나 기간, 대략의 해만 적힌 것은 그대로 적고 한 해로 줄이지 않았다. 적히지 않은 것은 추정하지 않고 ‘아카이브 표기’ 또는 ‘연도 미확인’으로 남겼다. 2006년 이후 리런치 라인은 제외했다.</p></div>'+
-    '<div><span class="lbl">모티프</span><p>상품명에 나타난 단어로만 붙였다. 붙지 않았다고 그 디테일이 없는 것은 아니다.</p></div>'+
-    '<div><span class="lbl">가격</span><p>판매처 표시가와 원화 환산가를 함께 적었다. 1달러 ₩'+won(d.rates.USD)+
+    (srcNote?'':'<div><span class="lbl">수집</span><p>Grailed 전량 · eBay 검색어 35종 · Depop 검색어 38종 · ENDYMA · Morphine · Archive Store · The Elephant 재고<br>브랜드가 헬무트 랭으로 지정된 매물만 · Depop 상품명 일부 잘림 · Vestiaire는 아카이브 검색분만<br>자동 수집 안 됨 · The RealReal · Vinted · Gem · 번개장터</p></div>')+
+    '<div><span class="lbl">연도</span><p>연도 표기 · 상품명에 연도·시즌 있음<br>아카이브 표기 · 연대·기간·아카이브 표기만 있음<br>연도 미확인 · 표기 없음<br>연도 추정 없음 · 2006년 이후 리런치 라인 제외</p></div>'+
+    '<div><span class="lbl">모티프</span><p>상품명 기준</p></div>'+
+    '<div><span class="lbl">가격</span><p>1달러 ₩'+won(d.rates.USD)+
       ' · 1파운드 ₩'+won(d.rates.GBP)+' · 1유로 ₩'+won(d.rates.EUR)+' · 100엔 ₩'+won(d.rates.JPY)+
-      '. eBay는 사이트 표시가가 원화다.</p></div>'+
-    '<div><span class="lbl">같은 모델</span><p>연도·시즌, 품목 종류, 모델 용어가 모두 일치하는 매물만 묶었다. 같은 모델이라는 뜻이지 동일한 개체라는 뜻은 아니다.</p></div>';
+      '<br>eBay는 원화 표시가</p></div>'+
+    '<div><span class="lbl">같은 모델</span><p>연도·시즌, 품목, 모델명이 모두 같은 매물 · 동일 개체 아님</p></div>'+
+    // per source: how many are up now, and the last day anything new came in
+    '<div><span class="lbl">판매처별</span><p>'+srcOrder().map(function(r){
+      return esc(r)+' '+won(SRCSTAT[r].n)+' · '+esc(srcFresh(r)) }).join('<br>')+
+      '<br>날짜는 수집 기준</p></div>'+
+    '<div><span class="lbl">생산지·라인</span><p>상품명의 Made in 표기 · Helmut Lang Jeans · Mainline</p></div>'+
+    '<div><span class="lbl">통관</span><p>면세 기준 물품가격 US$150 이하 · 미국발 특송 US$200 이하<br>초과 시 전액 과세 · 세액은 계산하지 않음<br>관세청 특송·우편물 통관 안내 · 2026-09-25 확인</p></div>'+
+    '<div><span class="lbl">저장</span><p>저장한 매물 · 저장한 검색 · 내 사이즈는 이 기기 브라우저에만 저장</p></div>';
   $('sig').textContent='Archive Index · '+d.issueLabel+' · '+d.dateKo;
+  $('grid').classList.toggle('list',LISTV);
+  $('vtog').setAttribute('aria-pressed',LISTV?'true':'false');
   readUrl();
   buildOrder(); buildCats(); buildPanel();
   apply();
@@ -1984,8 +2536,54 @@ function offClick(e){
 }
 $('applied').addEventListener('click',offClick);
 $('empty').addEventListener('click',offClick);
+$('applied').addEventListener('click',function(e){ if(e.target.closest('#wsv')) toggleWatch() });
+function watchClick(e){
+  var o=e.target.closest('[data-wopen]'); if(o){ openWatch(+o.dataset.wopen); return }
+  var d=e.target.closest('[data-wdel]');
+  if(d){ var i=+d.dataset.wdel; if(WATCH[i]){ WATCH.splice(i,1); WNEW=null; persistWatch();
+    buildApplied(); buildWatch();
+    var fq=filterQs(); if(watchAt(fq)<0){ var cat=keys(F.cat);
+      $('hlabel').textContent = cat.length===1?cat[0] : (F.flag.saved?'저장함':'전체'); $('hnote').textContent='' }
+    // focus stays in the list, on the next row or the panel's close button
+    var nx=$('pwatch').querySelector('[data-wdel="'+Math.min(i,WATCH.length-1)+'"]')||$('pdone');
+    if(nx) try{ nx.focus({preventScroll:true}) }catch(err){} } }
+}
+$('wbar').addEventListener('click',watchClick);
+$('pwatch').addEventListener('click',watchClick);
+$('mytog').addEventListener('click',function(){
+  var box=$('mysz'), on=box.hidden;
+  box.hidden=!on; this.setAttribute('aria-expanded',on?'true':'false');
+  if(on){ buildMySize();
+    try{ box.scrollIntoView({block:'nearest'}) }catch(e){} }
+});
+$('mysz').addEventListener('click',function(e){
+  var b=e.target.closest('[data-szg]'); if(b) pickSize(b.dataset.szg,b.dataset.szv);
+});
+function setListView(on){
+  // keep the reader on the garment they were looking at
+  var anchor=-1, cards=$('grid').children, top=(document.querySelector('.navwrap')||{offsetHeight:0}).offsetHeight;
+  for(var i=0;i<cards.length;i++){ var r=cards[i].getBoundingClientRect(); if(r.bottom>top+4){ anchor=i; break } }
+  LISTV=!!on;
+  try{ localStorage.setItem('hlx.view',LISTV?'list':'grid') }catch(e){}
+  $('grid').classList.toggle('list',LISTV);
+  $('vtog').setAttribute('aria-pressed',LISTV?'true':'false');
+  var n=shown; paint(true); while(shown<n && shown<view.length) paint(false);
+  if(anchor>0 && $('grid').children[anchor]) $('grid').children[anchor].scrollIntoView({block:'start'});
+}
+$('vtog').addEventListener('click',function(){ setListView(!LISTV) });
+window.addEventListener('storage',function(e){
+  if(!D) return;
+  if(e.key==='hlx.watch' || e.key===null){ loadWatch(); WNEW=null }
+  if(e.key==='hlx.mysize' || e.key===null){ loadSize(); WCNT=null;
+    if(!mineAny() && F.flag.mine) delete F.flag.mine;
+    if(!$('mysz').hidden) buildMySize() }
+  if(e.key==='hlx.saved' || e.key===null){ loadSaved(); WCNT=null;
+    var bs=document.querySelectorAll('#grid .save[data-save]');
+    for(var i=0;i<bs.length;i++) bs[i].classList.toggle('on',!!saved[D.items[+bs[i].dataset.save].l]) }
+  if(e.key==='hlx.watch' || e.key==='hlx.mysize' || e.key==='hlx.saved' || e.key===null) apply(true,false);
+});
 function clearAll(){
-  ['y','cat','motif','price','src','cert','flag'].forEach(function(g){F[g]={}});
+  FG.forEach(function(g){F[g]={}});
   F.size=''; $('fsize').value='';
   endSearch();
   buildCats(); buildPanel(); apply(false,true);
@@ -2055,13 +2653,14 @@ $('grid').addEventListener('click',function(e){
 });
 $('qv').addEventListener('click',function(e){
   var s=e.target.closest('[data-save]'); if(s){ toggleSave(+s.dataset.save); return }
+  var p=e.target.closest('[data-ph]'); if(p){ showPhoto(+p.dataset.ph); return }
   var l=e.target.closest('#qvlink'); if(l) copyLink(l);
 });
 function copyLink(btn){
   var url=location.href, settled=false;
   var done=function(ok){
     if(settled) return; settled=true;
-    btn.textContent = ok ? '복사됨' : '복사할 수 없음';
+    btn.textContent = ok ? '복사됨' : '복사 실패';
     setTimeout(function(){ if(btn.isConnected) btn.textContent='링크 복사' },1600);
   };
   var legacy=function(){
@@ -2170,7 +2769,7 @@ $('top').addEventListener('click',function(){window.scrollTo({top:0,behavior:'sm
 function fail(msg){
   $('grid').innerHTML='';
   $('empty').hidden=false;
-  $('empty').innerHTML='<span class="lbl">불러오기 실패</span>이 파일은 데이터를 안에 담고 있어야 정상입니다.<br>최신 index.html 을 다시 받아 주세요. <span style="color:#a49f96">('+esc(msg)+')</span>';
+  $('empty').innerHTML='<span class="lbl">불러오기 실패</span><span style="color:#a49f96">'+esc(msg)+'</span>';
 }
 (function load(){
   // read before boot: apply() rewrites the address from the filters
@@ -2179,11 +2778,11 @@ function fail(msg){
   var txt=el?el.textContent.trim():'';
   if(txt && txt.charAt(0)==='{'){
     var parsed=null;
-    try{ parsed=JSON.parse(txt) }catch(e){ fail('내장 데이터 손상 — '+e.message); return }
+    try{ parsed=JSON.parse(txt) }catch(e){ fail('데이터 손상: '+e.message); return }
     if(parsed && parsed.items){
       // boot dereferences d.counts and d.rates; if either is missing the throw
       // used to escape and leave a masthead over nothing, with no explanation
-      try{ boot(parsed) }catch(e){ fail('데이터 구조가 예상과 다르다 — '+e.message) }
+      try{ boot(parsed) }catch(e){ fail('데이터 형식 오류: '+e.message) }
       return;
     }
   }
